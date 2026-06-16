@@ -1,0 +1,152 @@
+diff --git a/baselines/fedbn/fedbn/dataset.py b/baselines/fedbn/fedbn/dataset.py
+index 034ddc6..df09be9 100644
+--- a/baselines/fedbn/fedbn/dataset.py
++++ b/baselines/fedbn/fedbn/dataset.py
+@@ -14,6 +14,10 @@ from flwr.common import Context
+ 
+ DATA_DIRECTORY = Path(os.path.abspath(__file__)).parent.parent / "data"
+ 
++# cache built dataloaders per worker process (avoids rebuilding all
++# clients' loaders on every client_fn call -> prevents host OOM at scale)
++_DATA_CACHE: dict = {}
++
+ 
+ class DigitsDataset(Dataset):
+     """Split datasets."""
+@@ -214,11 +218,14 @@ def load_partition(
+ # pylint: disable=too-many-locals
+ def get_data(context: Context) -> List[Tuple[DataLoader, DataLoader, str]]:
+     """Generate dataloaders for each client."""
+-    client_data = []
+     run_config = context.run_config
+     to_include = str(run_config["to-include"]).split(",")
+     percent = float(run_config["percent"])
+     num_clients = int(run_config["num-clients"])
++    cache_key = (",".join(to_include), percent, num_clients, int(run_config["batch-size"]))
++    if cache_key in _DATA_CACHE:
++        return _DATA_CACHE[cache_key]
++    client_data = []
+ 
+     total_partitions = 10
+     # each dataset was pre-processed by the authors and split
+@@ -276,4 +283,5 @@ def get_data(context: Context) -> List[Tuple[DataLoader, DataLoader, str]]:
+         len(client_data) == num_clients
+     ), f"{len(client_data) = } | {num_clients = }"
+ 
++    _DATA_CACHE[cache_key] = client_data
+     return client_data
+diff --git a/baselines/fedbn/fedbn/server_app.py b/baselines/fedbn/fedbn/server_app.py
+index 985c39a..e97363b 100644
+--- a/baselines/fedbn/fedbn/server_app.py
++++ b/baselines/fedbn/fedbn/server_app.py
+@@ -16,6 +16,29 @@ from flwr.server import (
+ from flwr.server.strategy import FedAvg
+ 
+ 
++class PeriodicEvalFedAvg(FedAvg):
++    """FedAvg that only runs federated evaluation every `eval_every` rounds.
++
++    (and always on the final round). Training is unchanged; this only reduces
++    how often the (expensive) all-client evaluation is triggered.
++    """
++
++    def __init__(self, *args, eval_every=5, total_rounds=10, **kwargs):
++        super().__init__(*args, **kwargs)
++        self.eval_every = int(eval_every)
++        self.total_rounds = int(total_rounds)
++
++    def configure_evaluate(self, server_round, parameters, client_manager):
++        if (
++            server_round % self.eval_every != 0
++            and server_round != self.total_rounds
++        ):
++            return []
++        return super().configure_evaluate(
++            server_round, parameters, client_manager
++        )
++
++
+ def server_fn(context: Context):
+     """Construct components that set the ServerApp behaviour."""
+     # Read from context
+@@ -31,7 +54,7 @@ def server_fn(context: Context):
+     )
+     parameters = ndarrays_to_parameters(ndarrays)
+     # Define Strategy
+-    strategy = FedAvg(
++    strategy = PeriodicEvalFedAvg(
+         fraction_fit=float(run_config["fraction-fit"]),
+         fraction_evaluate=float(run_config["fraction-evaluate"]),
+         min_available_clients=int(run_config["num-clients"]),
+@@ -39,6 +62,8 @@ def server_fn(context: Context):
+         initial_parameters=parameters,
+         fit_metrics_aggregation_fn=get_metrics_aggregation_fn(),
+         evaluate_metrics_aggregation_fn=get_metrics_aggregation_fn(),
++        eval_every=run_config["eval-every"],
++        total_rounds=num_rounds,
+     )
+     config = ServerConfig(num_rounds=int(num_rounds))
+     client_manager = SimpleClientManager()
+diff --git a/baselines/fedbn/fedbn/strategy.py b/baselines/fedbn/fedbn/strategy.py
+index 7052be9..2f5cdbe 100644
+--- a/baselines/fedbn/fedbn/strategy.py
++++ b/baselines/fedbn/fedbn/strategy.py
+@@ -54,7 +54,21 @@ def get_metrics_aggregation_fn():
+         accuracies.update((k, v / totals[k]) for k, v in accuracies.items())
+         losses.update((k, v / totals[k]) for k, v in losses.items())
+ 
+-        to_return = {"accuracy": accuracies, "losses": losses}
++        # --- instrumentation added for partial-participation study ---
++        # overall (data-weighted) accuracy across ALL reporting clients and the
++        # single worst client's accuracy (key signal under client sampling)
++        total_examples = sum(n for n, _ in metrics)
++        overall_accuracy = (
++            sum(n * m["accuracy"] for n, m in metrics) / total_examples
++        )
++        min_client_accuracy = min(m["accuracy"] for _, m in metrics)
++        to_return = {
++            "accuracy": accuracies,
++            "losses": losses,
++            "overall_accuracy": overall_accuracy,
++            "min_client_accuracy": min_client_accuracy,
++            "num_clients_reported": len(metrics),
++        }
+ 
+         if "pre_train_acc" in metrics[0][1]:
+             pre_train_accuracies.update(
+diff --git a/baselines/fedbn/pyproject.toml b/baselines/fedbn/pyproject.toml
+index bc469b6..c9397e4 100644
+--- a/baselines/fedbn/pyproject.toml
++++ b/baselines/fedbn/pyproject.toml
+@@ -117,7 +117,7 @@ clientapp = "fedbn.client_app:app"
+ [tool.flwr.app.config]
+ algorithm-name = "FedBN"
+ num-server-rounds = 10
+-num-clients = 5 
++num-clients = 20
+ local-epochs = 1
+ to-include = "MNIST,SVHN,USPS,SynthDigits,MNIST_M"
+ batch-size = 32
+@@ -125,18 +125,19 @@ num-classes = 10
+ percent = 0.1 #  fraction of partitions to include for each client. Note there are 10 partitions per dataset, therefore percent should be any of {0.1, 0.2, .... 0.8, 0.9, 1.0}
+ learning-rate = 0.01
+ results-save-dir = "results"
+-fraction-evaluate = 0.0
++fraction-evaluate = 1.0
+ fraction-fit = 1.0
++eval-every = 5
+ 
+ 
+ [tool.flwr.federations]
+ default = "local-simulation"
+ 
+ [tool.flwr.federations.local-simulation]
+-options.num-supernodes = 5 # This is here so that we can access the number of clients during training. Does not change the actual amount of clients.
++options.num-supernodes = 20 # This is here so that we can access the number of clients during training. Does not change the actual amount of clients.
+ # any multiple of 5 between 5 and 50 (both included)
+ # this value should be choosen taking dataset.percent into consideration
+ # for example if percent=0.2 then at most we can have 25 clients, each
+ # using two data partitions of the same dataset.
+ options.backend.client-resources.num-cpus = 2
+-options.backend.client-resources.num-gpus = 0.0
++options.backend.client-resources.num-gpus = 0.45
