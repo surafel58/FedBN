@@ -1,0 +1,8 @@
+seeds=[0, 1]  (dist = relative-L2 to oracle; lower = better)
+
+ K     n        dist_global           dist_sim sim<glob %  improve%  wEntRatio   wMax  donors stale_self
+ 1   739   0.2351±0.0821     0.2276±0.0866        89.6      3.2      0.995   0.53     2.0     0.2287
+ 3   739   0.2253±0.0538     0.2133±0.0560        94.2      5.3      0.994   0.25     5.0     0.2287
+ 5   739   0.2296±0.0501     0.2173±0.0514        98.4      5.4      0.994   0.17     7.6     0.2287
+
+Reading: wEntRatio=1.0 -> uniform weights (similarity adds nothing); lower -> more selective. improve% = how much closer sim is to oracle than global-avg. stale_self = dist from oracle to i's OWN stale stats (context).
