@@ -1,0 +1,13 @@
+seeds=[0, 1, 2, 3, 4]
+config                                overall     worst-client  n
+FedBN baseline                81.45 ± 2.30    29.37 ± 22.02  5
+FedAvg                        81.02 ± 3.75    63.18 ± 10.95  5
+TestTime-BN (1 batch=32)      84.23 ± 1.12    73.62 ± 1.25  5
+TestTime-BN (4 batch=128)     86.19 ± 0.50    75.23 ± 2.00  5
+Oracle (full recompute)       84.94 ± 0.98    77.07 ± 1.42  5
+
+tt1      worst-client - FedAvg = +10.44  (vs FedAvg 63.18±10.95)
+tt4      worst-client - FedAvg = +12.05  (vs FedAvg 63.18±10.95)
+oracle   worst-client - FedAvg = +13.89  (vs FedAvg 63.18±10.95)
+tt1      worst-client - Oracle = -3.44  (recovery vs full)
+tt4      worst-client - Oracle = -1.84  (recovery vs full)
