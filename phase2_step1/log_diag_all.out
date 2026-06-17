@@ -1,0 +1,607 @@
+Loading project configuration... 
+Success
+[92mINFO [0m:      Starting Flower ServerApp, config: num_rounds=30, no round_timeout
+[92mINFO [0m:      
+[92mINFO [0m:      [INIT]
+[92mINFO [0m:      Using initial global parameters provided by strategy
+[92mINFO [0m:      Starting evaluation of initial global parameters
+[92mINFO [0m:      Evaluation returned no results (`None`)
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 1]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 2]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 3]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 4]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 5]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: strategy sampled 20 clients (out of 20)
+[92mINFO [0m:      aggregate_evaluate: received 20 results and 0 failures
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 6]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 7]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 8]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 9]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 10]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: strategy sampled 20 clients (out of 20)
+[92mINFO [0m:      aggregate_evaluate: received 20 results and 0 failures
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 11]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 12]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 13]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 14]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 15]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: strategy sampled 20 clients (out of 20)
+[92mINFO [0m:      aggregate_evaluate: received 20 results and 0 failures
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 16]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 17]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 18]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 19]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 20]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: strategy sampled 20 clients (out of 20)
+[92mINFO [0m:      aggregate_evaluate: received 20 results and 0 failures
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 21]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 22]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 23]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 24]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 25]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: strategy sampled 20 clients (out of 20)
+[92mINFO [0m:      aggregate_evaluate: received 20 results and 0 failures
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 26]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 27]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 28]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 29]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 30]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 20)
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      configure_evaluate: strategy sampled 20 clients (out of 20)
+[92mINFO [0m:      aggregate_evaluate: received 20 results and 0 failures
+[92mINFO [0m:      Results saver function provided. Executing
+[92mINFO [0m:      
+[92mINFO [0m:      [SUMMARY]
+[92mINFO [0m:      Run finished 30 round(s) in 666.80s
+[92mINFO [0m:      	History (loss, distributed):
+[92mINFO [0m:      		round 5: 2.128305835489439
+[92mINFO [0m:      		round 10: 1.66349538229002
+[92mINFO [0m:      		round 15: 1.392443272147545
+[92mINFO [0m:      		round 20: 1.3133322590127456
+[92mINFO [0m:      		round 25: 1.1606586930045781
+[92mINFO [0m:      		round 30: 1.114032724478055
+[92mINFO [0m:      	History (metrics, distributed, fit):
+[92mINFO [0m:      	{'accuracy': [(1, {'MNIST': 0.765814266487214, 'USPS': 0.8279569892473119}),
+[92mINFO [0m:      	              (2,
+[92mINFO [0m:      	               {'SVHN': 0.26881720430107525,
+[92mINFO [0m:      	                'SynthDigits': 0.41801075268817206}),
+[92mINFO [0m:      	              (3, {'SVHN': 0.46639784946236557, 'USPS': 0.9153225806451614}),
+[92mINFO [0m:      	              (4, {'MNIST': 0.911290322580645}),
+[92mINFO [0m:      	              (5, {'MNIST_M': 0.5920698924731184}),
+[92mINFO [0m:      	              (6, {'USPS': 0.9361559139784946}),
+[92mINFO [0m:      	              (7, {'MNIST': 0.946164199192463, 'USPS': 0.967741935483871}),
+[92mINFO [0m:      	              (8,
+[92mINFO [0m:      	               {'SynthDigits': 0.6774193548387096, 'USPS': 0.9852150537634409}),
+[92mINFO [0m:      	              (9, {'MNIST': 0.9663770459775106}),
+[92mINFO [0m:      	              (10,
+[92mINFO [0m:      	               {'SVHN': 0.5416666666666666, 'SynthDigits': 0.7943548387096774}),
+[92mINFO [0m:      	              (11, {'MNIST_M': 0.803763440860215, 'SVHN': 0.6841397849462365}),
+[92mINFO [0m:      	              (12,
+[92mINFO [0m:      	               {'MNIST': 0.9731182795698925, 'MNIST_M': 0.8951612903225806}),
+[92mINFO [0m:      	              (13,
+[92mINFO [0m:      	               {'SVHN': 0.739247311827957, 'SynthDigits': 0.8051075268817204}),
+[92mINFO [0m:      	              (14, {'MNIST': 0.9758064516129034, 'USPS': 0.9623655913978495}),
+[92mINFO [0m:      	              (15, {'MNIST': 0.9946236559139785, 'USPS': 0.967741935483871}),
+[92mINFO [0m:      	              (16, {'SVHN': 0.676985195154778, 'USPS': 0.9704301075268816}),
+[92mINFO [0m:      	              (17, {'MNIST': 0.9771197846567968, 'USPS': 0.978494623655914}),
+[92mINFO [0m:      	              (18, {'USPS': 0.9845430107526881}),
+[92mINFO [0m:      	              (19, {'MNIST': 0.9878869448183042, 'SVHN': 0.7886944818304172}),
+[92mINFO [0m:      	              (20, {'MNIST_M': 0.7661290322580645, 'USPS': 0.9879032258064516}),
+[92mINFO [0m:      	              (21, {'MNIST': 0.9475806451612904, 'USPS': 0.9744623655913979}),
+[92mINFO [0m:      	              (22, {'MNIST': 0.9932705248990579, 'USPS': 0.978494623655914}),
+[92mINFO [0m:      	              (23,
+[92mINFO [0m:      	               {'MNIST': 0.9757738896366085,
+[92mINFO [0m:      	                'SynthDigits': 0.8440860215053764}),
+[92mINFO [0m:      	              (24, {'MNIST': 0.9946164199192463, 'SVHN': 0.7970430107526881}),
+[92mINFO [0m:      	              (25, {'MNIST_M': 0.9045698924731184, 'USPS': 0.9879032258064516}),
+[92mINFO [0m:      	              (26, {'MNIST': 0.9663978494623656, 'USPS': 0.989247311827957}),
+[92mINFO [0m:      	              (27, {'MNIST': 0.9744623655913979, 'SVHN': 0.7795698924731184}),
+[92mINFO [0m:      	              (28, {'SVHN': 0.8331090174966352, 'USPS': 0.9879032258064516}),
+[92mINFO [0m:      	              (29, {'MNIST': 0.9986541049798116, 'USPS': 0.9865591397849464}),
+[92mINFO [0m:      	              (30,
+[92mINFO [0m:      	               {'MNIST_M': 0.7886944818304172, 'USPS': 0.9758064516129034})],
+[92mINFO [0m:      	 'losses': [(1, {'MNIST': 0.9141016999880472, 'USPS': 0.7168851407865683}),
+[92mINFO [0m:      	            (2, {'SVHN': 2.133326863249143, 'SynthDigits': 1.7896698365608852}),
+[92mINFO [0m:      	            (3, {'SVHN': 1.6833390469352405, 'USPS': 0.39876018029948074}),
+[92mINFO [0m:      	            (4, {'MNIST': 0.43512989673763514}),
+[92mINFO [0m:      	            (5, {'MNIST_M': 1.2329758691291015}),
+[92mINFO [0m:      	            (6, {'USPS': 0.26183000626042485}),
+[92mINFO [0m:      	            (7, {'MNIST': 0.2266731041794022, 'USPS': 0.14231913769617677}),
+[92mINFO [0m:      	            (8,
+[92mINFO [0m:      	             {'SynthDigits': 0.9807674437761307, 'USPS': 0.10087620078896482}),
+[92mINFO [0m:      	            (9, {'MNIST': 0.16785589776312312}),
+[92mINFO [0m:      	            (10,
+[92mINFO [0m:      	             {'SVHN': 1.3806218206882477, 'SynthDigits': 0.7506554946303368}),
+[92mINFO [0m:      	            (11, {'MNIST_M': 0.6980809718370438, 'SVHN': 1.0242658481001854}),
+[92mINFO [0m:      	            (12, {'MNIST': 0.14420238866781196, 'MNIST_M': 0.4624352330962817}),
+[92mINFO [0m:      	            (13,
+[92mINFO [0m:      	             {'SVHN': 0.9120087921619415, 'SynthDigits': 0.6753816232085228}),
+[92mINFO [0m:      	            (14, {'MNIST': 0.1148954068000118, 'USPS': 0.16006282701467475}),
+[92mINFO [0m:      	            (15, {'MNIST': 0.062480899350096784, 'USPS': 0.1546100776953002}),
+[92mINFO [0m:      	            (16, {'SVHN': 1.0269948542118073, 'USPS': 0.1208701158563296}),
+[92mINFO [0m:      	            (17, {'MNIST': 0.11446771894892056, 'USPS': 0.10396005702205002}),
+[92mINFO [0m:      	            (18, {'USPS': 0.07180987407142918}),
+[92mINFO [0m:      	            (19, {'MNIST': 0.07310237110747646, 'SVHN': 0.729896504431963}),
+[92mINFO [0m:      	            (20, {'MNIST_M': 0.7322893105447292, 'USPS': 0.06258740765042603}),
+[92mINFO [0m:      	            (21, {'MNIST': 0.17770870262756944, 'USPS': 0.09936380580378075}),
+[92mINFO [0m:      	            (22, {'MNIST': 0.05143227086712917, 'USPS': 0.08101796653742592}),
+[92mINFO [0m:      	            (23,
+[92mINFO [0m:      	             {'MNIST': 0.08645508298650384, 'SynthDigits': 0.5075427331030369}),
+[92mINFO [0m:      	            (24, {'MNIST': 0.04898863165484121, 'SVHN': 0.6942716923852762}),
+[92mINFO [0m:      	            (25, {'MNIST_M': 0.378321489940087, 'USPS': 0.062409105633075036}),
+[92mINFO [0m:      	            (26, {'MNIST': 0.13227610616013408, 'USPS': 0.059024412262563906}),
+[92mINFO [0m:      	            (27, {'MNIST': 0.10696621650519471, 'SVHN': 0.7181460981567701}),
+[92mINFO [0m:      	            (28, {'SVHN': 0.5463196622828642, 'USPS': 0.06134059955365956}),
+[92mINFO [0m:      	            (29, {'MNIST': 0.03429810927870373, 'USPS': 0.05149787780828774}),
+[92mINFO [0m:      	            (30, {'MNIST_M': 0.6611857699851195, 'USPS': 0.0835413495854785})],
+[92mINFO [0m:      	 'min_client_accuracy': [(1, 0.765814266487214),
+[92mINFO [0m:      	                         (2, 0.26881720430107525),
+[92mINFO [0m:      	                         (3, 0.46639784946236557),
+[92mINFO [0m:      	                         (4, 0.9018817204301075),
+[92mINFO [0m:      	                         (5, 0.581989247311828),
+[92mINFO [0m:      	                         (6, 0.9327956989247311),
+[92mINFO [0m:      	                         (7, 0.946164199192463),
+[92mINFO [0m:      	                         (8, 0.6774193548387096),
+[92mINFO [0m:      	                         (9, 0.9637096774193549),
+[92mINFO [0m:      	                         (10, 0.5416666666666666),
+[92mINFO [0m:      	                         (11, 0.6841397849462365),
+[92mINFO [0m:      	                         (12, 0.8951612903225806),
+[92mINFO [0m:      	                         (13, 0.739247311827957),
+[92mINFO [0m:      	                         (14, 0.9623655913978495),
+[92mINFO [0m:      	                         (15, 0.967741935483871),
+[92mINFO [0m:      	                         (16, 0.676985195154778),
+[92mINFO [0m:      	                         (17, 0.9771197846567967),
+[92mINFO [0m:      	                         (18, 0.9838709677419355),
+[92mINFO [0m:      	                         (19, 0.7886944818304172),
+[92mINFO [0m:      	                         (20, 0.7661290322580645),
+[92mINFO [0m:      	                         (21, 0.9475806451612904),
+[92mINFO [0m:      	                         (22, 0.978494623655914),
+[92mINFO [0m:      	                         (23, 0.8440860215053764),
+[92mINFO [0m:      	                         (24, 0.7970430107526881),
+[92mINFO [0m:      	                         (25, 0.9045698924731183),
+[92mINFO [0m:      	                         (26, 0.9663978494623656),
+[92mINFO [0m:      	                         (27, 0.7795698924731183),
+[92mINFO [0m:      	                         (28, 0.8331090174966352),
+[92mINFO [0m:      	                         (29, 0.9865591397849462),
+[92mINFO [0m:      	                         (30, 0.7886944818304172)],
+[92mINFO [0m:      	 'num_clients_reported': [(1, 2),
+[92mINFO [0m:      	                          (2, 2),
+[92mINFO [0m:      	                          (3, 2),
+[92mINFO [0m:      	                          (4, 2),
+[92mINFO [0m:      	                          (5, 2),
+[92mINFO [0m:      	                          (6, 2),
+[92mINFO [0m:      	                          (7, 2),
+[92mINFO [0m:      	                          (8, 2),
+[92mINFO [0m:      	                          (9, 2),
+[92mINFO [0m:      	                          (10, 2),
+[92mINFO [0m:      	                          (11, 2),
+[92mINFO [0m:      	                          (12, 2),
+[92mINFO [0m:      	                          (13, 2),
+[92mINFO [0m:      	                          (14, 2),
+[92mINFO [0m:      	                          (15, 2),
+[92mINFO [0m:      	                          (16, 2),
+[92mINFO [0m:      	                          (17, 2),
+[92mINFO [0m:      	                          (18, 2),
+[92mINFO [0m:      	                          (19, 2),
+[92mINFO [0m:      	                          (20, 2),
+[92mINFO [0m:      	                          (21, 2),
+[92mINFO [0m:      	                          (22, 2),
+[92mINFO [0m:      	                          (23, 2),
+[92mINFO [0m:      	                          (24, 2),
+[92mINFO [0m:      	                          (25, 2),
+[92mINFO [0m:      	                          (26, 2),
+[92mINFO [0m:      	                          (27, 2),
+[92mINFO [0m:      	                          (28, 2),
+[92mINFO [0m:      	                          (29, 2),
+[92mINFO [0m:      	                          (30, 2)],
+[92mINFO [0m:      	 'overall_accuracy': [(1, 0.796885627867263),
+[92mINFO [0m:      	                      (2, 0.3434139784946237),
+[92mINFO [0m:      	                      (3, 0.6908602150537635),
+[92mINFO [0m:      	                      (4, 0.911290322580645),
+[92mINFO [0m:      	                      (5, 0.5920698924731184),
+[92mINFO [0m:      	                      (6, 0.9361559139784946),
+[92mINFO [0m:      	                      (7, 0.956953067338167),
+[92mINFO [0m:      	                      (8, 0.8313172043010754),
+[92mINFO [0m:      	                      (9, 0.9663770459775106),
+[92mINFO [0m:      	                      (10, 0.668010752688172),
+[92mINFO [0m:      	                      (11, 0.7439516129032256),
+[92mINFO [0m:      	                      (12, 0.9341397849462366),
+[92mINFO [0m:      	                      (13, 0.7721774193548386),
+[92mINFO [0m:      	                      (14, 0.9690860215053764),
+[92mINFO [0m:      	                      (15, 0.9811827956989246),
+[92mINFO [0m:      	                      (16, 0.8237076513408299),
+[92mINFO [0m:      	                      (17, 0.9778072041563554),
+[92mINFO [0m:      	                      (18, 0.9845430107526881),
+[92mINFO [0m:      	                      (19, 0.8882907133243606),
+[92mINFO [0m:      	                      (20, 0.877016129032258),
+[92mINFO [0m:      	                      (21, 0.961021505376344),
+[92mINFO [0m:      	                      (22, 0.9858825742774858),
+[92mINFO [0m:      	                      (23, 0.9099299555709924),
+[92mINFO [0m:      	                      (24, 0.8958297153359673),
+[92mINFO [0m:      	                      (25, 0.946236559139785),
+[92mINFO [0m:      	                      (26, 0.9778225806451614),
+[92mINFO [0m:      	                      (27, 0.877016129032258),
+[92mINFO [0m:      	                      (28, 0.9105061216515434),
+[92mINFO [0m:      	                      (29, 0.9926066223823788),
+[92mINFO [0m:      	                      (30, 0.8822504667216603)],
+[92mINFO [0m:      	 'pre_train_accuracies': [(1,
+[92mINFO [0m:      	                           {'MNIST': 0.09959623149394348,
+[92mINFO [0m:      	                            'USPS': 0.07661290322580645}),
+[92mINFO [0m:      	                          (2,
+[92mINFO [0m:      	                           {'SVHN': 0.10215053763440861,
+[92mINFO [0m:      	                            'SynthDigits': 0.0954301075268817}),
+[92mINFO [0m:      	                          (3,
+[92mINFO [0m:      	                           {'SVHN': 0.19758064516129034,
+[92mINFO [0m:      	                            'USPS': 0.3118279569892473}),
+[92mINFO [0m:      	                          (4, {'MNIST': 0.29368279569892475}),
+[92mINFO [0m:      	                          (5, {'MNIST_M': 0.26344086021505375}),
+[92mINFO [0m:      	                          (6, {'USPS': 0.530241935483871}),
+[92mINFO [0m:      	                          (7,
+[92mINFO [0m:      	                           {'MNIST': 0.44549125168236875,
+[92mINFO [0m:      	                            'USPS': 0.9596774193548386}),
+[92mINFO [0m:      	                          (8,
+[92mINFO [0m:      	                           {'SynthDigits': 0.2446236559139785,
+[92mINFO [0m:      	                            'USPS': 0.9946236559139785}),
+[92mINFO [0m:      	                          (9, {'MNIST': 0.43902498588981026}),
+[92mINFO [0m:      	                          (10,
+[92mINFO [0m:      	                           {'SVHN': 0.19892473118279566,
+[92mINFO [0m:      	                            'SynthDigits': 0.4932795698924732}),
+[92mINFO [0m:      	                          (11,
+[92mINFO [0m:      	                           {'MNIST_M': 0.6115591397849462,
+[92mINFO [0m:      	                            'SVHN': 0.2271505376344086}),
+[92mINFO [0m:      	                          (12,
+[92mINFO [0m:      	                           {'MNIST': 0.885752688172043,
+[92mINFO [0m:      	                            'MNIST_M': 0.853494623655914}),
+[92mINFO [0m:      	                          (13,
+[92mINFO [0m:      	                           {'SVHN': 0.5228494623655914,
+[92mINFO [0m:      	                            'SynthDigits': 0.20295698924731184}),
+[92mINFO [0m:      	                          (14,
+[92mINFO [0m:      	                           {'MNIST': 0.9301075268817204,
+[92mINFO [0m:      	                            'USPS': 0.23387096774193547}),
+[92mINFO [0m:      	                          (15,
+[92mINFO [0m:      	                           {'MNIST': 0.9986559139784946,
+[92mINFO [0m:      	                            'USPS': 0.9233870967741935}),
+[92mINFO [0m:      	                          (16,
+[92mINFO [0m:      	                           {'SVHN': 0.5746971736204576,
+[92mINFO [0m:      	                            'USPS': 0.9637096774193549}),
+[92mINFO [0m:      	                          (17,
+[92mINFO [0m:      	                           {'MNIST': 0.9259757738896366,
+[92mINFO [0m:      	                            'USPS': 0.978494623655914}),
+[92mINFO [0m:      	                          (18, {'USPS': 0.9845430107526881}),
+[92mINFO [0m:      	                          (19,
+[92mINFO [0m:      	                           {'MNIST': 0.9246298788694481,
+[92mINFO [0m:      	                            'SVHN': 0.49663526244952894}),
+[92mINFO [0m:      	                          (20,
+[92mINFO [0m:      	                           {'MNIST_M': 0.20698924731182797,
+[92mINFO [0m:      	                            'USPS': 0.9838709677419355}),
+[92mINFO [0m:      	                          (21,
+[92mINFO [0m:      	                           {'MNIST': 0.7755376344086021,
+[92mINFO [0m:      	                            'USPS': 0.9758064516129034}),
+[92mINFO [0m:      	                          (22, {'MNIST': 0.9946164199192463, 'USPS': 0.875}),
+[92mINFO [0m:      	                          (23,
+[92mINFO [0m:      	                           {'MNIST': 0.9811574697173621,
+[92mINFO [0m:      	                            'SynthDigits': 0.6935483870967744}),
+[92mINFO [0m:      	                          (24,
+[92mINFO [0m:      	                           {'MNIST': 0.9959623149394347,
+[92mINFO [0m:      	                            'SVHN': 0.20430107526881722}),
+[92mINFO [0m:      	                          (25,
+[92mINFO [0m:      	                           {'MNIST_M': 0.8655913978494624,
+[92mINFO [0m:      	                            'USPS': 0.9811827956989246}),
+[92mINFO [0m:      	                          (26,
+[92mINFO [0m:      	                           {'MNIST': 0.9368279569892474,
+[92mINFO [0m:      	                            'USPS': 0.9623655913978495}),
+[92mINFO [0m:      	                          (27,
+[92mINFO [0m:      	                           {'MNIST': 0.9758064516129034,
+[92mINFO [0m:      	                            'SVHN': 0.646505376344086}),
+[92mINFO [0m:      	                          (28,
+[92mINFO [0m:      	                           {'SVHN': 0.8142664872139974,
+[92mINFO [0m:      	                            'USPS': 0.9825268817204301}),
+[92mINFO [0m:      	                          (29,
+[92mINFO [0m:      	                           {'MNIST': 0.9892328398384928,
+[92mINFO [0m:      	                            'USPS': 0.9516129032258065}),
+[92mINFO [0m:      	                          (30,
+[92mINFO [0m:      	                           {'MNIST_M': 0.7227456258411844,
+[92mINFO [0m:      	                            'USPS': 0.978494623655914})],
+[92mINFO [0m:      	 'pre_train_losses': [(1,
+[92mINFO [0m:      	                       {'MNIST': 2.3023659388224282,
+[92mINFO [0m:      	                        'USPS': 2.3049621880054474}),
+[92mINFO [0m:      	                      (2,
+[92mINFO [0m:      	                       {'SVHN': 2.296959320704142,
+[92mINFO [0m:      	                        'SynthDigits': 2.301865667104721}),
+[92mINFO [0m:      	                      (3,
+[92mINFO [0m:      	                       {'SVHN': 2.2941092054049173, 'USPS': 2.293825695912043}),
+[92mINFO [0m:      	                      (4, {'MNIST': 2.2904294778903327}),
+[92mINFO [0m:      	                      (5, {'MNIST_M': 2.2960364818573}),
+[92mINFO [0m:      	                      (6, {'USPS': 1.8959026833375294}),
+[92mINFO [0m:      	                      (7,
+[92mINFO [0m:      	                       {'MNIST': 2.2873769998550415,
+[92mINFO [0m:      	                        'USPS': 0.8563865770896276}),
+[92mINFO [0m:      	                      (8,
+[92mINFO [0m:      	                       {'SynthDigits': 2.297634561856588,
+[92mINFO [0m:      	                        'USPS': 0.10225657001137733}),
+[92mINFO [0m:      	                      (9, {'MNIST': 1.5528226718306541}),
+[92mINFO [0m:      	                      (10,
+[92mINFO [0m:      	                       {'SVHN': 2.294887433449427,
+[92mINFO [0m:      	                        'SynthDigits': 1.7881387025117874}),
+[92mINFO [0m:      	                      (11,
+[92mINFO [0m:      	                       {'MNIST_M': 1.5897897134224575,
+[92mINFO [0m:      	                        'SVHN': 2.0729543566703796}),
+[92mINFO [0m:      	                      (12,
+[92mINFO [0m:      	                       {'MNIST': 0.3908455880979697,
+[92mINFO [0m:      	                        'MNIST_M': 0.6806100035707155}),
+[92mINFO [0m:      	                      (13,
+[92mINFO [0m:      	                       {'SVHN': 1.811388040582339,
+[92mINFO [0m:      	                        'SynthDigits': 2.294611543416977}),
+[92mINFO [0m:      	                      (14,
+[92mINFO [0m:      	                       {'MNIST': 0.270755788932244, 'USPS': 2.290980209906896}),
+[92mINFO [0m:      	                      (15,
+[92mINFO [0m:      	                       {'MNIST': 0.0546155438447992,
+[92mINFO [0m:      	                        'USPS': 0.32720666378736496}),
+[92mINFO [0m:      	                      (16,
+[92mINFO [0m:      	                       {'SVHN': 1.3227318425973256,
+[92mINFO [0m:      	                        'USPS': 0.18409728662421307}),
+[92mINFO [0m:      	                      (17,
+[92mINFO [0m:      	                       {'MNIST': 0.30297969343761605,
+[92mINFO [0m:      	                        'USPS': 0.13262199719126025}),
+[92mINFO [0m:      	                      (18, {'USPS': 0.32802837147998315}),
+[92mINFO [0m:      	                      (19,
+[92mINFO [0m:      	                       {'MNIST': 0.6902980953454971,
+[92mINFO [0m:      	                        'SVHN': 1.8477502167224884}),
+[92mINFO [0m:      	                      (20,
+[92mINFO [0m:      	                       {'MNIST_M': 2.2976845800876617,
+[92mINFO [0m:      	                        'USPS': 0.09911696729250252}),
+[92mINFO [0m:      	                      (21,
+[92mINFO [0m:      	                       {'MNIST': 1.0536031052470207,
+[92mINFO [0m:      	                        'USPS': 0.14519418822601438}),
+[92mINFO [0m:      	                      (22,
+[92mINFO [0m:      	                       {'MNIST': 0.07647434047733744,
+[92mINFO [0m:      	                        'USPS': 1.0879825403292973}),
+[92mINFO [0m:      	                      (23,
+[92mINFO [0m:      	                       {'MNIST': 0.08045672574856629,
+[92mINFO [0m:      	                        'SynthDigits': 1.2997049639622371}),
+[92mINFO [0m:      	                      (24,
+[92mINFO [0m:      	                       {'MNIST': 0.06252920945795874,
+[92mINFO [0m:      	                        'SVHN': 2.292393207550049}),
+[92mINFO [0m:      	                      (25,
+[92mINFO [0m:      	                       {'MNIST_M': 0.5530854264895121,
+[92mINFO [0m:      	                        'USPS': 0.10195555778530736}),
+[92mINFO [0m:      	                      (26,
+[92mINFO [0m:      	                       {'MNIST': 0.24284992615381876,
+[92mINFO [0m:      	                        'USPS': 0.13697985361795872}),
+[92mINFO [0m:      	                      (27,
+[92mINFO [0m:      	                       {'MNIST': 0.08322626530813675,
+[92mINFO [0m:      	                        'SVHN': 1.0914908026655514}),
+[92mINFO [0m:      	                      (28,
+[92mINFO [0m:      	                       {'SVHN': 0.6151483201732239,
+[92mINFO [0m:      	                        'USPS': 0.10853237891569734}),
+[92mINFO [0m:      	                      (29,
+[92mINFO [0m:      	                       {'MNIST': 0.08260084874927998,
+[92mINFO [0m:      	                        'USPS': 0.161282725011309}),
+[92mINFO [0m:      	                      (30,
+[92mINFO [0m:      	                       {'MNIST_M': 1.1741614614923794,
+[92mINFO [0m:      	                        'USPS': 0.058637458578838654})]}
+[92mINFO [0m:      	History (metrics, distributed, evaluate):
+[92mINFO [0m:      	{'accuracy': [(5,
+[92mINFO [0m:      	               {'MNIST': 0.5934107142857142,
+[92mINFO [0m:      	                'MNIST_M': 0.45148214285714283,
+[92mINFO [0m:      	                'SVHN': 0.24962231846107358,
+[92mINFO [0m:      	                'SynthDigits': 0.26343170639424895,
+[92mINFO [0m:      	                'USPS': 0.5327956989247311}),
+[92mINFO [0m:      	              (10,
+[92mINFO [0m:      	               {'MNIST': 0.8423571428571428,
+[92mINFO [0m:      	                'MNIST_M': 0.37485714285714283,
+[92mINFO [0m:      	                'SVHN': 0.31181387853761705,
+[92mINFO [0m:      	                'SynthDigits': 0.47325929789039883,
+[92mINFO [0m:      	                'USPS': 0.7334677419354838}),
+[92mINFO [0m:      	              (15,
+[92mINFO [0m:      	               {'MNIST': 0.8744464285714285,
+[92mINFO [0m:      	                'MNIST_M': 0.4034642857142857,
+[92mINFO [0m:      	                'SVHN': 0.4553076845603787,
+[92mINFO [0m:      	                'SynthDigits': 0.5868842736039104,
+[92mINFO [0m:      	                'USPS': 0.9340053763440861}),
+[92mINFO [0m:      	              (20,
+[92mINFO [0m:      	               {'MNIST': 0.9172142857142856,
+[92mINFO [0m:      	                'MNIST_M': 0.6039821428571429,
+[92mINFO [0m:      	                'SVHN': 0.5409910363581427,
+[92mINFO [0m:      	                'SynthDigits': 0.5876870059616938,
+[92mINFO [0m:      	                'USPS': 0.9422043010752688}),
+[92mINFO [0m:      	              (25,
+[92mINFO [0m:      	               {'MNIST': 0.9478214285714285,
+[92mINFO [0m:      	                'MNIST_M': 0.5361428571428571,
+[92mINFO [0m:      	                'SVHN': 0.5930984993453521,
+[92mINFO [0m:      	                'SynthDigits': 0.6047770244705545,
+[92mINFO [0m:      	                'USPS': 0.9608870967741936}),
+[92mINFO [0m:      	              (30,
+[92mINFO [0m:      	               {'MNIST': 0.9601428571428571,
+[92mINFO [0m:      	                'MNIST_M': 0.6110714285714285,
+[92mINFO [0m:      	                'SVHN': 0.6707372343639844,
+[92mINFO [0m:      	                'SynthDigits': 0.6116155883465758,
+[92mINFO [0m:      	                'USPS': 0.971505376344086})],
+[92mINFO [0m:      	 'losses': [(5,
+[92mINFO [0m:      	             {'MNIST': 1.6279926732794878,
+[92mINFO [0m:      	              'MNIST_M': 1.9556991082348236,
+[92mINFO [0m:      	              'SVHN': 2.212286872708279,
+[92mINFO [0m:      	              'SynthDigits': 2.211979462604248,
+[92mINFO [0m:      	              'USPS': 1.9059343610779713}),
+[92mINFO [0m:      	            (10,
+[92mINFO [0m:      	             {'MNIST': 0.7186073672757846,
+[92mINFO [0m:      	              'MNIST_M': 1.9577396657641075,
+[92mINFO [0m:      	              'SVHN': 2.0517360421674455,
+[92mINFO [0m:      	              'SynthDigits': 1.6889904579074555,
+[92mINFO [0m:      	              'USPS': 1.0867420525242717}),
+[92mINFO [0m:      	            (15,
+[92mINFO [0m:      	             {'MNIST': 0.5657074815523492,
+[92mINFO [0m:      	              'MNIST_M': 1.7617226280101903,
+[92mINFO [0m:      	              'SVHN': 1.6955147895260134,
+[92mINFO [0m:      	              'SynthDigits': 1.4137930487872574,
+[92mINFO [0m:      	              'USPS': 0.4926735892639322}),
+[92mINFO [0m:      	            (20,
+[92mINFO [0m:      	             {'MNIST': 0.3737860926497115,
+[92mINFO [0m:      	              'MNIST_M': 1.4047372969862533,
+[92mINFO [0m:      	              'SVHN': 1.4072942852781976,
+[92mINFO [0m:      	              'SynthDigits': 1.4337073227205357,
+[92mINFO [0m:      	              'USPS': 0.3856916019408885}),
+[92mINFO [0m:      	            (25,
+[92mINFO [0m:      	             {'MNIST': 0.1872789906433541,
+[92mINFO [0m:      	              'MNIST_M': 1.4480798388554899,
+[92mINFO [0m:      	              'SVHN': 1.3053874498452158,
+[92mINFO [0m:      	              'SynthDigits': 1.2489491845395768,
+[92mINFO [0m:      	              'USPS': 0.1565493306744907}),
+[92mINFO [0m:      	            (30,
+[92mINFO [0m:      	             {'MNIST': 0.15136314815624732,
+[92mINFO [0m:      	              'MNIST_M': 1.2517452873629795,
+[92mINFO [0m:      	              'SVHN': 1.0976217096962406,
+[92mINFO [0m:      	              'SynthDigits': 1.255021903563915,
+[92mINFO [0m:      	              'USPS': 0.10826121224879713})],
+[92mINFO [0m:      	 'min_client_accuracy': [(5, 0.22122690227117014),
+[92mINFO [0m:      	                         (10, 0.17864285714285713),
+[92mINFO [0m:      	                         (15, 0.18),
+[92mINFO [0m:      	                         (20, 0.21064558364387148),
+[92mINFO [0m:      	                         (25, 0.13627020891493083),
+[92mINFO [0m:      	                         (30, 0.16742857142857143)],
+[92mINFO [0m:      	 'num_clients_reported': [(5, 20),
+[92mINFO [0m:      	                          (10, 20),
+[92mINFO [0m:      	                          (15, 20),
+[92mINFO [0m:      	                          (20, 20),
+[92mINFO [0m:      	                          (25, 20),
+[92mINFO [0m:      	                          (30, 20)],
+[92mINFO [0m:      	 'overall_accuracy': [(5, 0.31421525849312276),
+[92mINFO [0m:      	                      (10, 0.48055752099782517),
+[92mINFO [0m:      	                      (15, 0.5834986171524261),
+[92mINFO [0m:      	                      (20, 0.618777322913068),
+[92mINFO [0m:      	                      (25, 0.6338207828985284),
+[92mINFO [0m:      	                      (30, 0.6572280431210599)]}
+[92mINFO [0m:      
+### BEGIN: RUN CONFIG ####
+{
+    "algorithm-name": "FedBN_all",
+    "num-server-rounds": 30,
+    "num-clients": 20,
+    "local-epochs": 1,
+    "to-include": "MNIST,SVHN,USPS,SynthDigits,MNIST_M",
+    "batch-size": 32,
+    "num-classes": 10,
+    "percent": 0.1,
+    "learning-rate": 0.01,
+    "results-save-dir": "results/diag_all",
+    "fraction-evaluate": 1.0,
+    "fraction-fit": 0.1,
+    "eval-every": 5,
+    "bn-local-mode": "all"
+}
+### END: RUN CONFIG ####
+Using default filename
+Results will be saved into: /home/suraf/fedbn-experiment/flower/baselines/fedbn/results/diag_all/FedBN_all/history.pkl

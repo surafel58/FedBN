@@ -1,0 +1,404 @@
+diff --git a/baselines/fedbn/fedbn/client_app.py b/baselines/fedbn/fedbn/client_app.py
+index 33925b9..558c225 100644
+--- a/baselines/fedbn/fedbn/client_app.py
++++ b/baselines/fedbn/fedbn/client_app.py
+@@ -1,5 +1,6 @@
+ """fedbn: A Flower Baseline."""
+ 
++import os
+ from typing import OrderedDict
+ 
+ import numpy as np
+@@ -7,13 +8,13 @@ import torch
+ 
+ from fedbn.dataset import get_data
+ from fedbn.model import CNNModel, test, train
+-from fedbn.utils import extract_weights
++from fedbn.utils import extract_weights, is_bn_local
+ from flwr.client import ClientApp, NumPyClient
+ from flwr.common import Array, ArrayRecord, Context, NDArrays
+ 
+ 
+ class FlowerClient(NumPyClient):
+-    """A class defining the client."""
++    """A class defining the client (plain FedAvg: every tensor is shared)."""
+ 
+     # pylint: disable=unused-argument
+     def __init__(
+@@ -35,18 +36,11 @@ class FlowerClient(NumPyClient):
+         self.learning_rate = learning_rate
+ 
+     def get_weights(self) -> NDArrays:
+-        """Return model parameters as a list of NumPy ndarrays w or w/o.
+-
+-        using BNlayers.
+-        """
+-        # Return all model parameters as a list of NumPy ndarrays
+-        return extract_weights(self.net, "FedAvg")
++        """Return all model parameters (FedAvg)."""
++        return extract_weights(self.net, "none")
+ 
+     def set_weights(self, parameters: NDArrays) -> None:
+-        """Set model parameters from a list of NumPy ndarrays Exclude the BN.
+-
+-        layer if available.
+-        """
++        """Set all model parameters (FedAvg)."""
+         params_dict = zip(self.net.state_dict().keys(), parameters)
+         state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
+         self.net.load_state_dict(state_dict, strict=True)
+@@ -57,7 +51,6 @@ class FlowerClient(NumPyClient):
+         pre_train_loss, pre_train_acc = test(
+             self.net, self.trainloader, device=self.device
+         )
+-        # Train model on local dataset
+         loss, acc = train(
+             self.net,
+             self.trainloader,
+@@ -74,11 +67,7 @@ class FlowerClient(NumPyClient):
+             "pre_train_loss": pre_train_loss,
+             "pre_train_acc": pre_train_acc,
+         }
+-        return (
+-            self.get_weights(),
+-            len(self.trainloader),
+-            metrics,
+-        )
++        return (self.get_weights(), len(self.trainloader), metrics)
+ 
+     def evaluate(self, parameters, config):
+         """Evaluate model using this client's data."""
+@@ -96,90 +85,131 @@ class FlowerClient(NumPyClient):
+ 
+ 
+ class FedBNFlowerClient(FlowerClient):
+-    """Similar to FlowerClient but this is used by FedBN clients."""
+-
+-    def __init__(self, client_state, *args, **kwargs) -> None:
++    """Generalised partial-BN client.
++
++    `mode` selects which BatchNorm tensors are kept LOCAL (personalised, never
++    sent to the server) -- see fedbn.utils.is_bn_local:
++      "all"    -> all BN tensors local                       (FedBN baseline)
++      "affine" -> BN affine (gamma/beta) local; stats shared   ("stats-shared")
++      "stats"  -> BN running stats local; affine shared        ("affine-shared")
++    Local tensors are persisted across rounds in the client's Context state, so
++    a client that is not sampled this round keeps its (stale) local tensors.
++    """
++
++    def __init__(self, client_state, mode, partition_id, *args, **kwargs):
+         super().__init__(*args, **kwargs)
+         self.client_state = client_state
+-        # For FedBN clients we need to persist the state of the BN
+-        # layers across rounds. In Simulation clients are states
+-        # so everything not communicated to the server (as it is the
+-        # case as with params in BN layers of FedBN clients) is lost
+-        # once a client completes its training. This is the case unless
+-        # we preserve the batch norm states in the Context.
++        self.mode = mode
++        self.partition_id = partition_id
+         if not self.client_state.array_records:
+-            # Ensure statefulness of error feedback buffer.
+-            self.client_state.array_records["local_batch_norm"] = ArrayRecord(
++            self.client_state.array_records["local_bn"] = ArrayRecord(
+                 OrderedDict({"initialisation": Array(np.array([-1]))})
+             )
+ 
+-    def _save_bn_statedict(self) -> None:
+-        """Save contents of state_dict related to BN layers."""
+-        bn_state = OrderedDict(
+-            {
+-                name: Array(val.cpu().numpy())
+-                for name, val in self.net.state_dict().items()
+-                if "bn" in name
+-            }
++    def _local_keys(self):
++        return [
++            k for k in self.net.state_dict().keys() if is_bn_local(k, self.mode)
++        ]
++
++    def _save_local_statedict(self) -> None:
++        sd = self.net.state_dict()
++        local_state = OrderedDict(
++            {name: Array(sd[name].cpu().numpy()) for name in self._local_keys()}
+         )
+-        self.client_state.array_records["local_batch_norm"] = ArrayRecord(
+-            bn_state
++        self.client_state.array_records["local_bn"] = ArrayRecord(local_state)
++
++    def _get_fit_count(self) -> int:
++        recs = self.client_state.array_records
++        if "fit_count" in recs:
++            return int(list(recs["fit_count"].values())[0].numpy()[0])
++        return 0
++
++    def _set_fit_count(self, value: int) -> None:
++        self.client_state.array_records["fit_count"] = ArrayRecord(
++            OrderedDict({"n": Array(np.array([value]))})
+         )
+ 
+     def get_weights(self) -> NDArrays:
+-        """Return model parameters as a list of NumPy ndarrays without BN.
+-
+-        layers.
+-        """
+-        # First update bn_state_dir
+-        self._save_bn_statedict()
+-        return extract_weights(self.net, "FedBN")
++        """Persist local BN tensors, then return only the SHARED tensors."""
++        self._save_local_statedict()
++        return extract_weights(self.net, self.mode)
+ 
+     def set_weights(self, parameters: NDArrays) -> None:
+-        """Set model parameters from a list of NumPy ndarrays Exclude the bn.
+-
+-        layer if available.
+-        """
+-        keys = [k for k in self.net.state_dict().keys() if "bn" not in k]
+-        params_dict = zip(keys, parameters)
++        """Load SHARED tensors from server, then reload persisted local BN."""
++        shared_keys = [
++            k
++            for k in self.net.state_dict().keys()
++            if not is_bn_local(k, self.mode)
++        ]
++        params_dict = zip(shared_keys, parameters)
+         state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
+         self.net.load_state_dict(state_dict, strict=False)
+-
+-        # Now also load from bn_state_dir
+-        if (
+-            "initialisation"
+-            not in self.client_state.array_records["local_batch_norm"].keys()
+-        ):  # It won't exist in the first round
+-            batch_norm_state = {
+-                k: torch.tensor(v.numpy())
+-                for k, v in self.client_state.array_records[
+-                    "local_batch_norm"
+-                ].items()
++        local_rec = self.client_state.array_records["local_bn"]
++        if "initialisation" not in local_rec.keys():
++            local_state = {
++                k: torch.tensor(v.numpy()) for k, v in local_rec.items()
+             }
+-            self.net.load_state_dict(batch_norm_state, strict=False)
++            self.net.load_state_dict(local_state, strict=False)
++
++    def fit(self, parameters, config):
++        out = super().fit(parameters, config)
++        self._set_fit_count(self._get_fit_count() + 1)
++        return out
++
++    def evaluate(self, parameters, config):
++        result = super().evaluate(parameters, config)
++        self._trace_bn(config)
++        return result
++
++    def _trace_bn(self, config) -> None:
++        """Log norms of a GLOBAL weight (conv1.weight) and bn1 local tensors.
++
++        Makes per-client staleness visible: for a rarely-sampled client the
++        global weight drifts while its local BN tensors stay frozen.
++        """
++        trace_dir = os.path.expanduser("~/fedbn-experiment/bn_trace")
++        os.makedirs(trace_dir, exist_ok=True)
++        rnd = int(config.get("round", -1))
++        sd = self.net.state_dict()
++
++        def norm(key):
++            return float(sd[key].float().norm()) if key in sd else float("nan")
++
++        line = (
++            f"{rnd},{self.partition_id},{self.dataset_name},"
++            f"{self._get_fit_count()},{norm('conv1.weight')},"
++            f"{norm('bn1.running_mean')},{norm('bn1.running_var')},"
++            f"{norm('bn1.weight')},{norm('bn1.bias')}\n"
++        )
++        with open(os.path.join(trace_dir, f"{self.mode}.csv"), "a") as fhandle:
++            fhandle.write(line)
+ 
+ 
+ def client_fn(context: Context):
+     """Construct a Client that will be run in a ClientApp."""
+-    # Load model and data
+     run_config = context.run_config
+     net = CNNModel(num_classes=run_config["num-classes"])
+     partition_id = int(context.node_config["partition-id"])
+     trainloader, valloader, dataset_name = (get_data(context))[partition_id]
+ 
+-    # Return Client instance
+-    client_type, client_state = (
+-        (FlowerClient, None)
+-        if run_config["algorithm-name"] == "FedAvg"
+-        else (FedBNFlowerClient, context.state)
+-    )
+-    return client_type(
++    mode = run_config["bn-local-mode"]
++    if mode == "none":
++        return FlowerClient(
++            net=net,
++            trainloader=trainloader,
++            testloader=valloader,
++            dataset_name=dataset_name,
++            learning_rate=run_config["learning-rate"],
++        ).to_client()
++    return FedBNFlowerClient(
++        client_state=context.state,
++        mode=mode,
++        partition_id=partition_id,
+         net=net,
+         trainloader=trainloader,
+         testloader=valloader,
+         dataset_name=dataset_name,
+         learning_rate=run_config["learning-rate"],
+-        client_state=client_state,
+     ).to_client()
+ 
+ 
+diff --git a/baselines/fedbn/fedbn/server_app.py b/baselines/fedbn/fedbn/server_app.py
+index 985c39a..00717e0 100644
+--- a/baselines/fedbn/fedbn/server_app.py
++++ b/baselines/fedbn/fedbn/server_app.py
+@@ -16,6 +16,29 @@ from flwr.server import (
+ from flwr.server.strategy import FedAvg
+ 
+ 
++class PeriodicEvalFedAvg(FedAvg):
++    """FedAvg that only runs federated evaluation every `eval_every` rounds.
++
++    (and always on the final round). Training is unchanged; this only reduces
++    how often the (expensive) all-client evaluation is triggered.
++    """
++
++    def __init__(self, *args, eval_every=5, total_rounds=10, **kwargs):
++        super().__init__(*args, **kwargs)
++        self.eval_every = int(eval_every)
++        self.total_rounds = int(total_rounds)
++
++    def configure_evaluate(self, server_round, parameters, client_manager):
++        if (
++            server_round % self.eval_every != 0
++            and server_round != self.total_rounds
++        ):
++            return []
++        return super().configure_evaluate(
++            server_round, parameters, client_manager
++        )
++
++
+ def server_fn(context: Context):
+     """Construct components that set the ServerApp behaviour."""
+     # Read from context
+@@ -27,18 +50,21 @@ def server_fn(context: Context):
+ 
+     ndarrays = extract_weights(
+         CNNModel(num_classes=run_config["num-classes"]),
+-        run_config["algorithm-name"],
++        run_config["bn-local-mode"],
+     )
+     parameters = ndarrays_to_parameters(ndarrays)
+     # Define Strategy
+-    strategy = FedAvg(
++    strategy = PeriodicEvalFedAvg(
+         fraction_fit=float(run_config["fraction-fit"]),
+         fraction_evaluate=float(run_config["fraction-evaluate"]),
+         min_available_clients=int(run_config["num-clients"]),
+         on_fit_config_fn=get_on_fit_config(),
++        on_evaluate_config_fn=get_on_fit_config(),
+         initial_parameters=parameters,
+         fit_metrics_aggregation_fn=get_metrics_aggregation_fn(),
+         evaluate_metrics_aggregation_fn=get_metrics_aggregation_fn(),
++        eval_every=run_config["eval-every"],
++        total_rounds=num_rounds,
+     )
+     config = ServerConfig(num_rounds=int(num_rounds))
+     client_manager = SimpleClientManager()
+diff --git a/baselines/fedbn/fedbn/utils.py b/baselines/fedbn/fedbn/utils.py
+index aceace0..65b996c 100644
+--- a/baselines/fedbn/fedbn/utils.py
++++ b/baselines/fedbn/fedbn/utils.py
+@@ -1,12 +1,42 @@
+ """fedbn: A Flower Baseline."""
+ 
+ 
+-def extract_weights(net, algorithm_name):
+-    """Extract model parameters as numpy arrays from state_dict."""
+-    if algorithm_name == "FedAvg":
+-        return [val.cpu().numpy() for _, val in net.state_dict().items()]
++def is_bn_local(name, mode):
++    """Return True if this state_dict tensor is kept LOCAL (not shared).
++
++    mode:
++      "none"/"FedAvg" -> nothing local (plain FedAvg, all tensors shared)
++      "all"/"FedBN"   -> ALL BatchNorm tensors local (FedBN baseline)
++      "affine"        -> only BN affine (weight=gamma, bias=beta) LOCAL;
++                         running_mean/var/num_batches_tracked SHARED
++                         (this is the "stats-shared" diagnostic variant)
++      "stats"         -> only BN running stats LOCAL;
++                         affine (gamma/beta) SHARED
++                         (this is the "affine-shared" diagnostic variant)
++    """
++    if mode in ("FedAvg", "none"):
++        return False
++    if mode in ("FedBN", "all"):
++        return "bn" in name
++    if "bn" not in name:
++        return False
++    is_affine = name.endswith(".weight") or name.endswith(".bias")
++    is_stat = (
++        "running_mean" in name
++        or "running_var" in name
++        or "num_batches_tracked" in name
++    )
++    if mode == "affine":
++        return is_affine
++    if mode == "stats":
++        return is_stat
++    raise ValueError(f"unknown bn-local-mode: {mode!r}")
++
++
++def extract_weights(net, mode):
++    """Return the SHARED params (numpy) = every tensor not kept local."""
+     return [
+         val.cpu().numpy()
+         for name, val in net.state_dict().items()
+-        if "bn" not in name
++        if not is_bn_local(name, mode)
+     ]
+diff --git a/baselines/fedbn/pyproject.toml b/baselines/fedbn/pyproject.toml
+index bc469b6..77235fb 100644
+--- a/baselines/fedbn/pyproject.toml
++++ b/baselines/fedbn/pyproject.toml
+@@ -117,7 +117,7 @@ clientapp = "fedbn.client_app:app"
+ [tool.flwr.app.config]
+ algorithm-name = "FedBN"
+ num-server-rounds = 10
+-num-clients = 5 
++num-clients = 20
+ local-epochs = 1
+ to-include = "MNIST,SVHN,USPS,SynthDigits,MNIST_M"
+ batch-size = 32
+@@ -125,18 +125,20 @@ num-classes = 10
+ percent = 0.1 #  fraction of partitions to include for each client. Note there are 10 partitions per dataset, therefore percent should be any of {0.1, 0.2, .... 0.8, 0.9, 1.0}
+ learning-rate = 0.01
+ results-save-dir = "results"
+-fraction-evaluate = 0.0
++fraction-evaluate = 1.0
+ fraction-fit = 1.0
++eval-every = 5
++bn-local-mode = "all"  # all|affine|stats|none  (which BN tensors stay LOCAL)
+ 
+ 
+ [tool.flwr.federations]
+ default = "local-simulation"
+ 
+ [tool.flwr.federations.local-simulation]
+-options.num-supernodes = 5 # This is here so that we can access the number of clients during training. Does not change the actual amount of clients.
++options.num-supernodes = 20 # This is here so that we can access the number of clients during training. Does not change the actual amount of clients.
+ # any multiple of 5 between 5 and 50 (both included)
+ # this value should be choosen taking dataset.percent into consideration
+ # for example if percent=0.2 then at most we can have 25 clients, each
+ # using two data partitions of the same dataset.
+ options.backend.client-resources.num-cpus = 2
+-options.backend.client-resources.num-gpus = 0.0
++options.backend.client-resources.num-gpus = 0.45
