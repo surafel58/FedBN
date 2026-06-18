@@ -1,0 +1,14 @@
+seeds=[0, 1, 2, 3, 4]
+config                                                 overall    worst-client  n
+#2 FedBN, no recompute (stale local)            81.75 ± 2.99   29.77 ± 23.34  5
+#1 FedAvg (shared global stats)                 83.91 ± 1.65   68.99 ± 2.77  5
+#4 Shared-global-stats (Candidate-3 ceiling)    81.59 ± 5.53   64.13 ± 12.84  5
+#3 frozen@5  (ideal stats frozen early)         78.78 ± 4.41   65.57 ± 4.78  5
+#3 frozen@15 (ideal stats frozen mid)           82.50 ± 1.51   70.19 ± 0.87  5
+#3 frozen@30 (ideal stats @final = no staleness)  86.39 ± 0.75   76.51 ± 1.18  5
+
+FedAvg worst-client bar = 68.99 ± 2.77
+  shared  - FedAvg = -4.87  (worst-client 64.13 ± 12.84)
+  fz5     - FedAvg = -3.42  (worst-client 65.57 ± 4.78)
+  fz15    - FedAvg = +1.20  (worst-client 70.19 ± 0.87)
+  fz30    - FedAvg = +7.52  (worst-client 76.51 ± 1.18)
