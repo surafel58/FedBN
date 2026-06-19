@@ -1,0 +1,29 @@
+=== seeds=5  worst-client (and overall) mean±std ===
+
+  FedAvg(a0)           worst  60.86 ± 16.76    overall  80.64 ±  9.00
+  align(a0.1)          worst  61.21 ± 15.23    overall  81.65 ±  7.12
+  align(a1.0)          worst  60.85 ± 15.34    overall  81.26 ±  7.49
+  align(a10.0)         worst  25.75 ± 21.87    overall  34.42 ± 30.57
+  FedBN_norecompute    worst  52.66 ± 12.34    overall  83.38 ±  1.21
+  oracle_recompute     worst  74.89 ±  1.19    overall  86.69 ±  1.15
+
+=== FULL per-seed worst-client table ===
+seed          FedAvg(a0)         align(a0.1)         align(a1.0)        align(a10.0)   FedBN_norecompute    oracle_recompute
+   0               69.55               70.75               67.65                7.90               65.25               73.25
+   1               67.95               68.25               69.65               51.85               33.15               75.40
+   2               64.70               64.15               62.90               53.20               43.65               73.70
+   3               74.20               71.70               73.15                7.90               63.25               76.00
+   4               27.90               31.20               30.90                7.90               58.00               76.10
+
+Healthy seeds (FedAvg worst ≥ 55.0): [0, 1, 2, 3]   collapsed: [4]
+
+=== PAIRED Δ vs FedAvg (per-seed worst-client) ===
+config         s0  s1  s2  s3  s4   | mean(all)  mean(healthy)  #healthy-won
+align(a0.1)     +1.2   +0.3   -0.6   -2.5   +3.3   |   +0.35     -0.39±1.37   2/4
+align(a1.0)     -1.9   +1.7   -1.8   -1.0   +3.0   |   -0.01     -0.76±1.46   1/4
+align(a10.0)   -61.6  -16.1  -11.5  -66.3  -20.0   |  -35.11    -38.89±25.19   0/4
+
+================ VERDICT ================
+FAIL — no alignment α beats FedAvg robustly on the HEALTHY seeds
+   (either Δ_healthy not consistently >0, or any apparent win is on collapsed seeds).
+   Even this aggressive alignment CEILING does not lift shared-stats above FedAvg.
