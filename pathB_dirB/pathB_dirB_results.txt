@@ -1,0 +1,38 @@
+=== seeds=5  PAIRED Δworst-client vs FedAvg(λ0)  (FedAvg abs = 59.17 ± 14.55, high seed-variance -> paired needed) ===
+
+  [ref] fedbn_norecompute      abs  50.22 ± 13.06
+  [ref] fedbn_fullrecompute    abs  74.71 ± 1.07
+
+########## Regime A: SCARCE (random k)  —  Δ vs FedAvg (paired, mean±std) ##########
+    k      Δnaive(λ1)    Δbest-interior   λi  int>0 robust   int>naive
+    4  -6.68±16.64   +1.91±5.52     0.4            no         YES
+    8  +6.62±15.84   +7.47±15.62    0.9            no         YES
+   16 +10.88±15.40  +10.80±14.99    0.9            no          no
+   32 +13.25±14.88  +13.12±14.77    0.9            no          no
+   64 +13.91±15.34  +13.75±14.94    0.9            no          no
+  128 +14.38±15.70  +14.23±15.33    0.9            no          no
+  256 +14.70±15.69  +14.55±15.06    0.9            no          no
+ full +15.10±15.61  +14.68±14.99    0.9            no          no
+
+########## Regime B: BIASED (2-class k)  —  Δ vs FedAvg (paired, mean±std) ##########
+    k      Δnaive(λ1)    Δbest-interior   λi  int>0 robust   int>naive
+    4  -5.68±18.88   +1.43±2.32     0.2            no         YES
+    8  +0.93±17.36   +2.74±5.97     0.4            no         YES
+   16  +2.96±17.06   +3.76±9.78     0.6            no         YES
+   32  +3.32±17.59   +4.19±10.44    0.6            no         YES
+   64  +4.82±17.62   +5.52±12.86    0.7            no         YES
+  128  +5.45±17.01   +5.83±14.22    0.8            no         YES
+  256  +5.41±17.18   +6.06±12.69    0.7            no         YES
+ full +15.10±15.61  +14.68±14.99    0.9            no          no
+
+================ VERDICT (paired) ================
+FAIL — no interior-λ shrinkage gives a robustly-positive paired Δ over FedAvg
+       while also beating pure-local recompute. Shrinkage has no clear headroom.
+
+=== per-seed FedAvg vs naive-full (the variance story) ===
+  seed0: FedAvg=69.2  naive_full=75.0
+  seed1: FedAvg=68.6  naive_full=72.5
+  seed2: FedAvg=62.2  naive_full=73.7
+  seed3: FedAvg=65.5  naive_full=73.7
+  seed4: FedAvg=30.5  naive_full=76.4
+  -> seed4 FedAvg collapsed (30.5); naive recompute rescues it (76.4). The mean shrinkage gain is this one seed.
